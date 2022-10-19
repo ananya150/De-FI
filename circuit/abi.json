@@ -1,0 +1,40 @@
+{
+  "inputs": [
+    {
+      "name": "originalLocationHash",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "locationHash",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "originalDistrictCode",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "districtCode",
+      "public": true,
+      "type": "field"
+    },
+    {
+      "name": "originalLandArea",
+      "public": false,
+      "type": "field"
+    },
+    {
+      "name": "landArea",
+      "public": true,
+      "type": "field"
+    }
+  ],
+  "output": {
+    "type": "tuple",
+    "components": {
+      "elements": []
+    }
+  }
+}

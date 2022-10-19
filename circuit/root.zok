@@ -1,0 +1,6 @@
+def main(private field originalLocationHash, field locationHash , private field originalDistrictCode ,field districtCode ,private field originalLandArea ,field landArea) {
+    assert(originalLocationHash == locationHash);
+    assert(originalDistrictCode == districtCode);
+    assert(originalLandArea == landArea);
+    return;
+}
