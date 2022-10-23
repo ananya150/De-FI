@@ -24,7 +24,9 @@ contract Registry is Verifier{
         // Amount of premium the user needs to pay
         uint64 premiumToPay;
         // Timestamp at which premium is paid
-        uint64 premiumPaidOn;
+        uint256 premiumPaidOn;
+        // Expiry Timestamp for the insurance (6 months)
+        uint256 expiryTimestamp;
     }
 
 
@@ -59,15 +61,25 @@ contract Registry is Verifier{
         require(verifyTx(_proof , _input) , "Details not valid");
         
         uint64 _premiumToPay = _calculatePremium(_landArea , _protectionAgainst);
+        uint256 expiryTimestamp = uint(block.timestamp) + uint(15811200);
         users[msg.sender] = info(_location ,
                                 _districtCode , 
                                 _protectionAgainst , 
                                 _premiumToPay , 
-                                0);
+                                0,
+                                expiryTimestamp);
 
         isLocationRegistered[_location] = true;
         emit userRegistered(msg.sender, _protectionAgainst, _premiumToPay);
         return true;
+    }
+
+    function deRegister() external returns(bool){
+        require(users[msg.sender].expiryTimestamp > 0 && block.timestamp > users[msg.sender].expiryTimestamp , "Cannot de register");
+        isLocationRegistered[users[msg.sender].location] = false;
+
+        delete users[msg.sender];
+        return true; 
     }
 
     // calculating the premium value
